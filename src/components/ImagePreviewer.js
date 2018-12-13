@@ -16,7 +16,6 @@ export default function ImagePreviewer({ base64str,posts, getAnalyzedResult}){
             let base64str = fr.result.replace( /data:.*\/.*;base64,/ , "" );
             document.getElementById("img-base64").innerHTML = base64str;
             let key = document.getElementById("key").value;
-            console.log(key);
             getAnalyzedResult(base64str, key);
         }
     }
