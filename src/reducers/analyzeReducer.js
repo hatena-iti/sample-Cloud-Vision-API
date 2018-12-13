@@ -5,12 +5,18 @@ import {
 
 const initialState = {
     isFetching: false,
+    base64str:'',
     posts:''
 };
 
 export default function analyzeReducer(state = initialState, action) {
 
     switch (action.type) {
+        case 'INPUT_IMAGE':
+            return {
+                ...state,
+                base64str: action.base64str
+            };
         case 'POST_ANALYZE_REQUEST':
            return {
                ...state,
@@ -21,7 +27,7 @@ export default function analyzeReducer(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
-                posts: JSON.stringify(action.posts, null, '\t')
+                posts: JSON.stringify(action.posts)
             };
         case 'POST_ANALYZE_FAILURE':
             return {

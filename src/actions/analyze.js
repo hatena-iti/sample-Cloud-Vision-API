@@ -1,6 +1,14 @@
 import axios from 'axios'
 
 
+export const INPUT_IMAGE = 'INPUT_IMAGE'
+export const inputImg = (str) => {
+    return {
+        type: INPUT_IMAGE,
+        base64str: str
+    }
+}
+
 export const POST_ANALYZE_REQUEST = 'POST_ANALYZE_REQUEST'
 const postAnalyzeRequest = () => {
     return {
@@ -12,8 +20,7 @@ export const POST_ANALYZE_SUCCESS = 'POST_ANALYZE_SUCCESS'
 const postAnalyzeSuccess = (json) => {
     return {
         type: POST_ANALYZE_SUCCESS,
-        posts: json/*,
-        receivedAt: Date.now()*/
+        posts: json
     }
 };
 
@@ -24,6 +31,13 @@ const postAnalyzeFailure = (error) => {
         posts: error
     }
 };
+
+
+export const inputImage = (base64) => {
+    return (dispatch) => {
+        dispatch(inputImg(base64))
+    }
+}
 
 export const getAnalyzedResult = (base64, key) => {
     return (dispatch) => {

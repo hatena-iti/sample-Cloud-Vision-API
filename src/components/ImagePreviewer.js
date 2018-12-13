@@ -1,8 +1,9 @@
 
 import React from 'react';
 import '../App.css';
+import PropTypes from 'prop-types';
 
-export default function ImagePreviewer({ base64str,posts, getAnalyzedResult}){
+export default function ImagePreviewer({base64str,posts, getAnalyzedResult, inputImage}){
 
     const request = (e) => {
         const file = e.target.files[0];
@@ -12,11 +13,10 @@ export default function ImagePreviewer({ base64str,posts, getAnalyzedResult}){
         fr.onloadend = () => {
             const imgNode = document.getElementById("image1");
             imgNode.src = fr.result;
-
-            let base64str = fr.result.replace( /data:.*\/.*;base64,/ , "" );
-            document.getElementById("img-base64").innerHTML = base64str;
+            let base64 = fr.result.replace( /data:.*\/.*;base64,/ , "" );
             let key = document.getElementById("key").value;
-            getAnalyzedResult(base64str, key);
+            inputImage(base64);
+            getAnalyzedResult(base64, key);
         }
     }
     return (
@@ -34,4 +34,14 @@ export default function ImagePreviewer({ base64str,posts, getAnalyzedResult}){
     );
 }
 
+/*ImagePreviewer.defaultProps = {
+    base64str: 'default props base64str',
+    posts: 'default props posts'
+};
+
+ImagePreviewer.Proptypes = {
+    base64str: PropTypes.string,
+    posts: PropTypes.string,
+    getAnalyzedResult: PropTypes.func,
+};*/
 
